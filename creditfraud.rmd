@@ -2,8 +2,14 @@
 title: "creit fraud"
 author: "Fardil"
 date: "26/08/2020"
-output: html_document
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
 ---
+```{r, include=FALSE}
+options(tinytex.verbose = TRUE)
+```
 
 Loading the data
 ```{r}
@@ -117,7 +123,7 @@ corr_mat <- cor(data)
 corrplot(corr_mat, method = "number")
 ```
 ```{r}
-corrplot(cor_mat, method = "circle")
+corrplot(corr_mat, method = "circle")
 
 ```
 
@@ -163,14 +169,6 @@ control <- trainControl(method="repeatedcv", number = 5, repeats = 3)
 
 ```
 
-
-```{r}
-?train()
-```
-
-
-
-
 # Linear Discriminant Analysis (LDA)
 ```{r}
 lda <- train(Class~.,data=train, method="lda", metric = "Accuracy", trControl= control)
@@ -211,9 +209,6 @@ svm
 # To compare all the models
 we use the resamples fucntion from caret
 we can compare all of our model and choose the one that fits the best
-```{r}
-?caret::resampples()
-```
 ```{r}
 results <- resamples(list(lda=lda,logistic_reg=glm))
 ```
